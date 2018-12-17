@@ -1,4 +1,4 @@
-# vuex-test
+# vuex login register wirh authentication
 
 ## Project setup
 ```
