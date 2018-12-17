@@ -4,11 +4,11 @@
     <form action="#" @submit.prevent="login">
 
       <div v-if="successMessage" class="success-message">{{ successMessage }}</div>
-      <div v-if="serverError" class="server-error">{{ serverError }}</div>
+      <div v-if="serverError" class="server-error">{{ serverError.errors.message }}</div>
 
       <div class="form-control">
         <label for="email">Username/Email</label>
-        <input type="email" name="username" id="username" class="login-input" v-model="username">
+        <input type="email" name="email" id="email" class="login-input" v-model="email">
       </div>
 
       <div class="form-control mb-more">
@@ -39,7 +39,7 @@ export default {
   },
   data() {
     return {
-      username: '',
+      email: '',
       password: '',
       serverError: '',
       successMessage: this.dataSuccessMessage,
@@ -50,7 +50,7 @@ export default {
     login() {
       this.loading = true
       this.$store.dispatch('retrieveToken', {
-        username: this.username,
+        email: this.email,
         password: this.password,
       })
         .then(response => {

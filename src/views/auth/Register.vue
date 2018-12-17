@@ -6,9 +6,17 @@
       <!-- <div v-if="successMessage" class="success-message">{{ successMessage }}</div> -->
 
       <div v-if="serverErrors" class="server-error">
+      <!--   {{serverErrors}} -->
         <div v-for="(value, key) in serverErrors" :key="key">
-          {{ value[0] }}
-        </div>
+         <!--  {{ value.message }} -->
+          <div v-if="value.message.email">
+           {{ value.message.email[0]}}
+          </div>
+              
+          <div v-if="value.message.password">
+           {{ value.message.password[0]}}
+          </div> 
+        </div> 
 
       </div>
 
@@ -24,10 +32,16 @@
         <span class="form-error">{{ errors.first('email') }}</span>
       </div>
 
-      <div class="form-control mb-more">
+      <div class="form-control">
         <label for="password">Password</label>
-        <input type="password" name="password" id="password" class="login-input" :class="{ 'input-error': errors.has('password') }" v-model="password" v-validate="'required|min:6'">
+        <input type="password" name="password" id="password" class="login-input" :class="{ 'input-error': errors.has('password') }" v-model="password" v-validate="'required|min:6|confirmed:repeat_password'">
         <span class="form-error">{{ errors.first('password') }}</span>
+      </div>
+
+      <div class="mb-more">
+        <input type="password" name="repeat_password" placeholder="Password confirmation" id="repeat_password" ref="repeat_password" class="login-input" :class="{ 'input-error': errors.has('repeat_password') }" v-model="repeat_password" v-validate="'required'">
+        <span class="form-error">{{ errors.first('repeat_password') }}</span>
+
       </div>
 
       <div class="form-control">
@@ -63,6 +77,7 @@ export default {
         name: this.name,
         email: this.email,
         password: this.password,
+        repeat_password: this.repeat_password,
       })
         .then(response => {
           this.successMessage = 'Registered Successfully!'
@@ -73,7 +88,7 @@ export default {
           })
         })
         .catch(error => {
-          this.serverErrors = Object.values(error.response.data.errors)
+          this.serverErrors = Object.values(error.response.data)
         })
     }
   }

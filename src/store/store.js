@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 import axios from 'axios'
 
 Vue.use(Vuex)
-axios.defaults.baseURL = 'http://api.yekbun.net/rojhilat'
+axios.defaults.baseURL = 'http://localhost:8000/api'
 
 export const store = new Vuex.Store({
   state: {
@@ -93,15 +93,13 @@ export const store = new Vuex.Store({
           })
       })
     },
-    clearTodos(context) {
-      context.commit('clearTodos')
-    },
     register(context, data) {
       return new Promise((resolve, reject) => {
         axios.post('/register', {
           name: data.name,
           email: data.email,
           password: data.password,
+          repeat_password: data.repeat_password,
         })
           .then(response => {
             resolve(response)
@@ -121,8 +119,7 @@ export const store = new Vuex.Store({
               localStorage.removeItem('access_token')
               context.commit('destroyToken')
               resolve(response)
-              // console.log(response);
-              // context.commit('addTodo', response.data)
+               console.log(response);
             })
             .catch(error => {
               localStorage.removeItem('access_token')
@@ -136,7 +133,7 @@ export const store = new Vuex.Store({
 
       return new Promise((resolve, reject) => {
         axios.post('/login', {
-          username: credentials.username,
+          email: credentials.email,
           password: credentials.password,
         })
           .then(response => {
@@ -164,72 +161,7 @@ export const store = new Vuex.Store({
         .catch(error => {
           console.log(error)
         })
-    },
-    addTodo(context, todo) {
-      axios.post('/todos', {
-        title: todo.title,
-        completed: false,
-      })
-        .then(response => {
-          context.commit('addTodo', response.data)
-        })
-        .catch(error => {
-          console.log(error)
-        })
-    },
-    updateTodo(context, todo) {
-      axios.patch('/todos/' + todo.id, {
-        title: todo.title,
-        completed: todo.completed,
-      })
-        .then(response => {
-          context.commit('updateTodo', response.data)
-        })
-        .catch(error => {
-          console.log(error)
-        })
-    },
-    deleteTodo(context, id) {
-      axios.delete('/todos/' + id)
-        .then(response => {
-          context.commit('deleteTodo', id)
-        })
-        .catch(error => {
-          console.log(error)
-        })
-    },
-    checkAll(context, checked) {
-      axios.patch('/todosCheckAll', {
-        completed: checked,
-      })
-        .then(response => {
-          context.commit('checkAll', checked)
-        })
-        .catch(error => {
-          console.log(error)
-        })
-    },
-    updateFilter(context, filter) {
-
-      context.commit('updateFilter', filter)
-
-    },
-    clearCompleted(context) {
-      const completed = context.state.todos
-        .filter(todo => todo.completed)
-        .map(todo => todo.id)
-
-      axios.delete('/todosDeleteCompleted', {
-        data: {
-          todos: completed
-        }
-      })
-        .then(response => {
-          context.commit('clearCompleted')
-        })
-        .catch(error => {
-          console.log(error)
-        })
     }
+
   }
 })
