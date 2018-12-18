@@ -1,4 +1,4 @@
-# vuex login register wirh authentication
+# vuex simple (buy sale) website with token based authentication for ui we are used (vuetify)
 
 ## Project setup
 ```
