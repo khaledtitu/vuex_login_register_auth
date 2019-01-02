@@ -10,10 +10,16 @@ export const store = new Vuex.Store({
     token: localStorage.getItem('access_token') || null,
     filter: 'all',
     todos: [],
+    productAll: [],
+    imageAll: [],
   },
   getters: {
     loggedIn(state) {
       return state.token !== null
+    },
+    productGetters(state){
+      return state.productAll
+      
     }
   },
   mutations: {
@@ -23,7 +29,17 @@ export const store = new Vuex.Store({
     },
     destroyToken(state) {
       state.token = null
-    }
+    },
+    ProductData(state, productAll) {
+      state.productAll = productAll
+    },
+    ProductImageInsert(state, image){
+
+      state.imageAll.push({
+         id: image.id,
+         name: image.name,
+      })
+    },
   },
   actions: {
     retrieveName(context) {
@@ -96,7 +112,43 @@ export const store = new Vuex.Store({
             reject(error)
           })
         })
-    }
+    },
+    ProductData(context,credentials ){
+
+      return new Promise((resolve, reject) => {
+        axios.get('/products')
+          .then(response => {
+            context.commit('ProductData', response.data.data)
+            console.log(response.data.data)
+            resolve(response)
+          })
+          .catch(error => {
+            reject(error)
+          })
+      })
+
+    },
+    ProductImageInsert(context, credentials){
+     return new Promise((resolve, reject) => {
+        axios.post('/images',
+          credentials,
+                {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+           })
+          .then(response => {
+
+            context.commit('ProductImageInsert', response.data.data)
+            resolve(response)
+          })
+          .catch(error => {
+            console.log(error)
+            reject(error)
+          })
+        })
+
+    },
 
   }
 })
