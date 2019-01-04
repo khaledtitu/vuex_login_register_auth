@@ -11,6 +11,7 @@ export const store = new Vuex.Store({
     filter: 'all',
     todos: [],
     productAll: [],
+    categoryAll: [],
     imageAll: [],
   },
   getters: {
@@ -20,6 +21,9 @@ export const store = new Vuex.Store({
     productGetters(state){
       return state.productAll
       
+    },
+    categoryGetters(state){
+      return state.categoryAll
     }
   },
   mutations: {
@@ -29,6 +33,9 @@ export const store = new Vuex.Store({
     },
     destroyToken(state) {
       state.token = null
+    },
+    categoryData(state, categoryAll) {
+      state.categoryAll = categoryAll
     },
     ProductData(state, productAll) {
       state.productAll = productAll
@@ -147,6 +154,20 @@ export const store = new Vuex.Store({
             reject(error)
           })
         })
+
+    },
+    categoryData(context,credentials ){
+      return new Promise((resolve, reject) => {
+        axios.get('/product/categories')
+          .then(response => {
+            context.commit('categoryData', response.data.data)
+            console.log(response.data.data)
+            resolve(response)
+          })
+          .catch(error => {
+            reject(error)
+          })
+      })
 
     },
 
