@@ -3,6 +3,7 @@ import './plugins/vuetify'
 import App from './App.vue'
 import router from './router'
 import { store } from './store/store'
+import Paginate from 'vuejs-paginate'
 
 import VeeValidate from 'vee-validate'
 import CxltToastr from 'cxlt-vue2-toastr'
@@ -18,6 +19,8 @@ const toastrConfigs = {
 
 Vue.use(VeeValidate)
 Vue.use(CxltToastr, toastrConfigs)
+
+Vue.component('paginate', Paginate)
 
 
 

@@ -8,9 +8,8 @@ axios.defaults.baseURL = 'http://localhost:8000/api'
 export const store = new Vuex.Store({
   state: {
     token: localStorage.getItem('access_token') || null,
-    filter: 'all',
-    todos: [],
     productAll: [],
+    productPaginationAll: [],
     categoryAll: [],
     imageAll: [],
   },
@@ -20,6 +19,10 @@ export const store = new Vuex.Store({
     },
     productGetters(state){
       return state.productAll
+      
+    },
+    productPaginationGetters(state){
+      return state.productPaginationAll
       
     },
     categoryGetters(state){
@@ -39,6 +42,9 @@ export const store = new Vuex.Store({
     },
     ProductData(state, productAll) {
       state.productAll = productAll
+    },
+    ProductPagination(state, productPaginationAll) {
+      state.productPaginationAll = productPaginationAll
     },
     ProductImageInsert(state, image){
 
@@ -123,10 +129,11 @@ export const store = new Vuex.Store({
     ProductData(context,credentials ){
 
       return new Promise((resolve, reject) => {
-        axios.get('/products')
+        axios.get('/products?page='+credentials.current_page)
           .then(response => {
             context.commit('ProductData', response.data.data)
-            console.log(response.data.data)
+            context.commit('ProductPagination', response.data.meta)
+            console.log(response.data)
             resolve(response)
           })
           .catch(error => {
@@ -154,6 +161,22 @@ export const store = new Vuex.Store({
             reject(error)
           })
         })
+
+    },
+    CategoryProductData(context,credentials ){
+
+      return new Promise((resolve, reject) => {
+        axios.get('/product/cat/'+credentials.cat_id+'?page='+credentials.current_page)
+          .then(response => {
+            context.commit('ProductData', response.data.data)
+            context.commit('ProductPagination', response.data.meta)
+            console.log(response.data)
+            resolve(response)
+          })
+          .catch(error => {
+            reject(error)
+          })
+      })
 
     },
     categoryData(context,credentials ){
