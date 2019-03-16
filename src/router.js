@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './components/Home.vue'
+import ProductDetails from './components/Products/ProdictDetails'
+import CategoryList from './components/Categories/CategoryList'
 import About from './components/About.vue'
 
 import Login from './components/auth/Login'
@@ -19,43 +21,52 @@ export default new Router({
         path: '/',
         name: 'home',
         component: Home
-      },
-      {
-      path: '/login',
-      name: 'login',
-      component: Login,
-      props: true,
-      meta: {
-        requiresVisitor: true,
-      }
-    },,
-      {
-      path: '/post-ad',
-      name: 'post-ad',
-      component: PostAd,
-      props: true,
-      meta: {
-        requiresAuth: true,
-      }
     },
     {
-      path: '/register',
-      name: 'register',
-      component: Register,
-      meta: {
-        requiresVisitor: true,
+        path: '/prouct-details/:productId',
+        name: 'prouct-details',
+        component: ProductDetails
+    },
+    {
+        path: '/category-list/:catId',
+        name: 'category-list',
+        component: CategoryList
+    },
+    {
+        path: '/login',
+        name: 'login',
+        component: Login,
+        props: true,
+        meta: {
+          requiresVisitor: true,
       }
     },
     {
-      path: '/logout',
-      name: 'logout',
-      component: Logout
+        path: '/post-ad',
+        name: 'post-ad',
+        component: PostAd,
+        props: true,
+        meta: {
+          requiresAuth: true,
+        }
     },
     {
-      path: '/about',
-      name: 'about',
-      component: About
-
+        path: '/register',
+        name: 'register',
+        component: Register,
+        meta: {
+          requiresVisitor: true,
+        }
+    },
+    {
+        path: '/logout',
+        name: 'logout',
+        component: Logout
+    },
+    {
+        path: '/about',
+        name: 'about',
+        component: About
     }
   ]
 })

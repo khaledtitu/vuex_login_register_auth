@@ -14,7 +14,7 @@
 			<v-list-tile
 				v-for="cat in categoryGetters"
 				:key="cat.name"
-				@click="productDetails(cat.id)"
+				:href="'/category-list/'+ cat.id"
 			>
 				<v-list-tile-action>
 					<v-icon>dashboard</v-icon>
@@ -45,27 +45,11 @@
 			}
 		},
 		methods: {
-			readCategoryProducts(){
-				this.loading = true
-				this.$store.dispatch('CategoryProductData', {
-					cat_id: this.categoryId,
-					current_page: this.currentProductPage
-				})
-				.then(response => {
-					this.loading = false
-				})
-			},
 			readCategories() {
 				this.$store.dispatch('categoryData')
 				.then(response => {
 					this.loading = false
 				})
-			},
-			productDetails(CatID) {
-				this.categoryDataCheck = true
-				this.categoryId = CatID
-				this.currentProductPage = 0
-				this.readCategoryProducts()
 			}
 		}
 	}
