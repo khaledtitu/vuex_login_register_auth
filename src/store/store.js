@@ -94,7 +94,6 @@ export const store = new Vuex.Store({
               localStorage.removeItem('access_token')
               context.commit('destroyToken')
               resolve(response)
-               console.log(response);
             })
             .catch(error => {
               localStorage.removeItem('access_token')
@@ -105,7 +104,6 @@ export const store = new Vuex.Store({
       }
     },
     retrieveToken(context, credentials) {
-
       return new Promise((resolve, reject) => {
         axios.post('/login', {
           email: credentials.email,
@@ -126,14 +124,12 @@ export const store = new Vuex.Store({
           })
         })
     },
-    ProductData(context,credentials ){
-
+    ProductData(context, credentials ){
       return new Promise((resolve, reject) => {
         axios.get('/products?page='+credentials.current_page)
           .then(response => {
             context.commit('ProductData', response.data.data)
             context.commit('ProductPagination', response.data.meta)
-            console.log(response.data)
             resolve(response)
           })
           .catch(error => {
@@ -163,14 +159,13 @@ export const store = new Vuex.Store({
         })
 
     },
-    CategoryProductData(context,credentials ){
+    CategoryProductData(context, credentials ){
 
       return new Promise((resolve, reject) => {
         axios.get('/product/cat/'+credentials.cat_id+'?page='+credentials.current_page)
           .then(response => {
             context.commit('ProductData', response.data.data)
             context.commit('ProductPagination', response.data.meta)
-            console.log(response.data)
             resolve(response)
           })
           .catch(error => {
@@ -179,12 +174,11 @@ export const store = new Vuex.Store({
       })
 
     },
-    categoryData(context,credentials ){
+    categoryData(context, credentials ){
       return new Promise((resolve, reject) => {
         axios.get('/product/categories')
           .then(response => {
             context.commit('categoryData', response.data.data)
-            console.log(response.data.data)
             resolve(response)
           })
           .catch(error => {

@@ -1,39 +1,50 @@
 <template>
 	<div>
-		<v-progress-circular v-if="loading" :value="20"></v-progress-circular>
-		<div class="card-custom" v-for="item in productGetters" :key="item.id">
-			<v-layout>
-				<v-flex xs4>
-					<div v-if="item.product_image">
-						<div v-for="proImage in item.product_image.slice(0,1)" :key="proImage.id">
-							<v-img
-							:src="proImage.image.links" class="imgClass"
-							aspect-ratio="2.75"
-							></v-img>
+		<div v-if="Object.keys(productGetters).length">
+			<v-progress-circular v-if="loading" :value="20"></v-progress-circular>
+			<div class="card-custom" v-for="item in productGetters" :key="item.id">
+				<v-layout>
+					<v-flex xs4>
+						<div v-if="item.product_image">
+							<div v-for="proImage in item.product_image.slice(0,1)" :key="proImage.id">
+								<v-img
+								:src="proImage.image.links" class="imgClass"
+								aspect-ratio="2.75"
+								></v-img>
+							</div>
 						</div>
-					</div>
-				</v-flex>
-				<v-flex xs8>
-					<v-card-title>
-						<a :href="'/prouct-details/'+item.id" class="list-data">
-							<h3 class="headline ">{{item.name}}</h3>
-							<div>{{item.description}}</div>
-						</a>
-					</v-card-title>
-				</v-flex>
-			</v-layout>
+					</v-flex>
+					<v-flex xs8>
+						<v-card-title>
+							<router-link :to="'/prouct-details/'+item.id" class="list-data">
+								<h3 class="headline ">{{item.name}}</h3>
+								<div>{{item.description}}</div>
+							</router-link>
+						</v-card-title>
+					</v-flex>
+				</v-layout>
+			</div>
+			<paginate
+				:disabled="loading"
+				v-model="productPaginationGetters.current_page || 0"
+				:page-count="productPaginationGetters.last_page || 0"
+				:click-handler="clickCallback"
+				:prev-text="'Prev'"
+				:next-text="'Next'"
+				:container-class="'pagination'"
+				:page-class="'page-item'"
+			>
+			</paginate>
 		</div>
-		<paginate
-			:disabled="loading"
-			v-model="productPaginationGetters.current_page || 0"
-			:page-count="productPaginationGetters.last_page || 0"
-			:click-handler="clickCallback"
-			:prev-text="'Prev'"
-			:next-text="'Next'"
-			:container-class="'pagination'"
-			:page-class="'page-item'"
-		>
-		</paginate>
+		<div v-else>
+			<v-alert
+				:value="true"
+				type="info"
+			>
+			No data found in this category 
+			</v-alert>
+		</div>
+		
 	</div>
 </template>
 
@@ -45,17 +56,21 @@
 				categoryDataCheck: false,
 				categoryId: 0,
 				currentProductPage: 0,
+				categoryValue: 0,
 			}
 		},
 		created() {
 			if(this.$route.params.catId){
-				this.productDetails(this.$route.params.catId)
+				this.categoryValue = this.$route.params.catId
+				this.productDetails(this.categoryValue)
 			}else{
 				this.readProducts()
 			}
 		},
 		watch: {
-			'$route.params.catId': function () {
+			'$route.params.catId': function (new_val) {
+				this.categoryValue = new_val
+				this.productDetails(this.categoryValue)
 			}
 		},
 		computed: {
@@ -129,7 +144,7 @@
 		box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12);
 	}
 	.v-list__tile {
-		height: 120px !important;
+		
 	}
 	a.list-data {
 		color: #555;

@@ -1,6 +1,6 @@
 <template>
     <v-container>
-        <v-layout row>
+        <v-layout wrap row>
               <v-flex sm3 md3>
                   <Category></Category>
               </v-flex>

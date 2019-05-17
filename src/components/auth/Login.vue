@@ -1,16 +1,12 @@
-
 <template>
-
   <v-container>
       <v-layout
         text-xs-center
         wrap
       >
-
     <v-flex xs6 offset-xs3>
       <h2 text-xs-center>Login</h2>
       <v-form ref="form" >
-
         <v-alert
           v-if="successMessage"
           :value="true"
@@ -18,17 +14,15 @@
         >
         {{ successMessage }}
         </v-alert>
-        
         <div v-if="serverError">
-            <v-alert
-            :value="true"
-            type="error"
-            >
-            {{ serverError.errors.message }}
-          </v-alert>
+              <v-alert
+              :value="true"
+              type="error"
+              >
+              {{ serverError.errors.message }}
+            </v-alert>
 
-      </div>
-
+        </div>
         <div class="form-control">
           <v-text-field
             v-model="email"
@@ -37,11 +31,8 @@
             v-validate="'required|email'"
             label="Email"
           ></v-text-field>
-
         </div>
-
         <div class="form-control">
-        
           <v-text-field
               v-model="password"
               name="password"
@@ -51,7 +42,6 @@
               label="password "
             ></v-text-field>
         </div>
-
         <div class="form-control">
           <v-btn
              tag
@@ -62,13 +52,9 @@
               round
               color="green"
             >login</v-btn>
-
             <v-progress-circular v-if="loading" :value="20"></v-progress-circular>
-
         </div>
-
       </v-form>
-
     </v-flex>
     </v-layout>
   </v-container>

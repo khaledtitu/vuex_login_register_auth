@@ -92,7 +92,6 @@ export default {
   },
   methods: {
     validateBeforeSubmit() {
-      alert()
       this.$validator.validateAll().then((result) => {
         if (result) {
           // eslint-disable-next-line
