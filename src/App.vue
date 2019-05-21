@@ -1,31 +1,35 @@
 <template>
-  <v-app>
-    <Navbar></Navbar>
-    <v-content>
-     <router-view></router-view>
-    </v-content>
-  </v-app>
+    <v-app>
+        <v-content>
+            <Navbar></Navbar>
+            <Layout></Layout>
+        </v-content>
+    </v-app>
 </template>
-
 <script>
+  import Navbar from './components/portion/Navbar.vue'
+  import Layout from './components/Layouts/Layout.vue'
 
-import Navbar from './components//portion/Navbar'
 
-export default {
-  components: {
-      Navbar
-    },
-  data () {
-    return {
-      //
-    }
-  },
-  computed: {
-      loggedIn() {
-        return this.$store.getters.loggedIn
+  export default {
+    components: {
+        Navbar,
+        Layout
+      },
+    data () {
+      return {
+        //
       }
-    }
-}
+    },
+    computed: {
+        loggedIn() {
+          return this.$store.getters.loggedIn
+        },
+        currentMetaName(){
+          return this.$route.meta;
+        }
+      }
+  }
 </script>
 
 

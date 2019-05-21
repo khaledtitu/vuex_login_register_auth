@@ -48,6 +48,7 @@ export default new Router({
         props: true,
         meta: {
           requiresAuth: true,
+          name: 'dashboard'
         }
     },
     {

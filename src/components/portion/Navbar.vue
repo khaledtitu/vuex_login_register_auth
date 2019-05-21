@@ -1,7 +1,7 @@
 <template>
     <v-layout align-center justify-center row>
         <v-flex xs12 sm12 md12 px-5>
-          <v-toolbar dark flat app class="pl-5 navbarColor" >
+          <v-toolbar dark flat app class="pl-5" color="deep-purple darken-1" >
               <v-toolbar-title class="headline text-uppercase pl-5 ml-5">
                 <v-toolbar-items class="hidden-sm-and-down">
                   <v-btn :to="{ name: 'home' }" flat >home</v-btn>
@@ -13,7 +13,7 @@
                 </v-toolbar-items>
               </v-toolbar-title>
 
-            <v-menu class="hidden-md-and-up">
+            <v-menu class="hidden-sm-and-up">
               <v-toolbar-side-icon slot="activator"></v-toolbar-side-icon>
               <v-list>
                 <v-list-tile>

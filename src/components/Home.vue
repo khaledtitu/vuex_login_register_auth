@@ -1,18 +1,14 @@
 <template>
-    <v-container>
-        <v-layout wrap row>
-              <v-flex sm3 md3>
-                  <Category></Category>
-              </v-flex>
-              <v-flex xs12 sm9 md9>
-                  <ProductList></ProductList>
-              </v-flex>
-        </v-layout>
-    </v-container>
+      <v-layout wrap row>
+            <v-flex xs12 sm12 md12>
+                
+                <ProductList></ProductList>
+               
+            </v-flex>
+      </v-layout>
 </template>
 
 <script>
-import Category from './Categories/Category'
 import ProductList from './Products/ProductList'
 export default {
     data () {
@@ -20,7 +16,6 @@ export default {
         }
     },
     components: {
-        Category,
         ProductList
     }
 }
