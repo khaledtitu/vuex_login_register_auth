@@ -1,14 +1,15 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './components/Home.vue'
+import Home from './components/Pages/Home.vue'
 import ProductDetails from './components/Products/ProdictDetails'
 import CategoryList from './components/Categories/CategoryList'
-import About from './components/About.vue'
+import About from './components/Pages/About.vue'
 
-import Login from './components/auth/Login'
-import Logout from './components/auth/Logout'
-import Register from './components/auth/Register'
-import PostAd from './components/post/PostAd'
+import Login from './components/Auth/Login'
+import Logout from './components/Auth/Logout'
+import Register from './components/Auth/Register'
+import Dashboard from './components/Dashboard/Pages/Dashboard'
+import AddProduct from './components/Dashboard/Pages/AddProduct'
 
 
 Vue.use(Router)
@@ -42,9 +43,19 @@ export default new Router({
       }
     },
     {
-        path: '/post-ad',
-        name: 'post-ad',
-        component: PostAd,
+        path: '/Dashboard/home',
+        name: 'dashboard',
+        component: Dashboard,
+        props: true,
+        meta: {
+          requiresAuth: true,
+          name: 'dashboard'
+        }
+    },
+    {
+        path: '/Dashboard/add-product',
+        name: 'addProduct',
+        component: AddProduct,
         props: true,
         meta: {
           requiresAuth: true,

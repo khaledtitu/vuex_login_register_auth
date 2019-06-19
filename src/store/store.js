@@ -110,8 +110,7 @@ export const store = new Vuex.Store({
           password: credentials.password,
         })
           .then(response => {
-            const token = response.data.token
-
+            const token = response.data.data.token
             localStorage.setItem('access_token', token)
             context.commit('retrieveToken', token)
             resolve(response)
@@ -119,7 +118,7 @@ export const store = new Vuex.Store({
             // context.commit('addTodo', response.data)
           })
           .catch(error => {
-            console.log(error)
+            //console.log(error)
             reject(error)
           })
         })
@@ -153,7 +152,7 @@ export const store = new Vuex.Store({
             resolve(response)
           })
           .catch(error => {
-            console.log(error)
+            //console.log(error)
             reject(error)
           })
         })
@@ -174,7 +173,7 @@ export const store = new Vuex.Store({
       })
 
     },
-    categoryData(context, credentials ){
+    categoryData(context ){
       return new Promise((resolve, reject) => {
         axios.get('/product/categories')
           .then(response => {

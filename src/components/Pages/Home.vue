@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import ProductList from './Products/ProductList'
+import ProductList from '../Products/ProductList'
 export default {
     data () {
         return {

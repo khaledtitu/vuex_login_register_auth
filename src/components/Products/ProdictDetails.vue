@@ -1,9 +1,6 @@
 <template>
 	<v-container>
 		<v-layout row>
-			<v-flex sm3 md3>
-				<Category></Category>
-			</v-flex>
 				<v-flex xs12 sm9 md9>
 					<v-container fluid grid-list-sm>
 						<div class="title mb-3 text-md-center">
@@ -39,16 +36,12 @@
 
 <script>
 import axios from 'axios'
-import Category from './../Categories/Category'
 
 export default {
     data () {
         return {
 			productDetails: []
         }
-    },
-    components: {
-        Category
     },
 	created() {
 		if(this.$route.params.productId){

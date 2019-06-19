@@ -2,19 +2,25 @@
     <v-app>
         <v-content>
             <Navbar></Navbar>
-            <Layout></Layout>
+            <span v-if="currentMetaName=='dashboard'">
+                <DashboardLayout></DashboardLayout>
+            </span>
+            <span v-else>
+                <Layout></Layout>
+            </span>
         </v-content>
     </v-app>
 </template>
 <script>
-  import Navbar from './components/portion/Navbar.vue'
+  import Navbar from './components/Portion/Navbar.vue'
   import Layout from './components/Layouts/Layout.vue'
-
+  import DashboardLayout from './components/Layouts/DashboardLayout.vue'
 
   export default {
     components: {
         Navbar,
-        Layout
+        Layout,
+        DashboardLayout
       },
     data () {
       return {
@@ -26,7 +32,7 @@
           return this.$store.getters.loggedIn
         },
         currentMetaName(){
-          return this.$route.meta;
+          return this.$route.meta.name;
         }
       }
   }

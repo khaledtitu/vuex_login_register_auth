@@ -84,9 +84,9 @@ export default {
         email: this.email,
         password: this.password,
       })
-        .then(response => {
+        .then(() => {
           this.loading = false
-          this.$router.push({ name: 'post-ad' })
+          this.$router.push({ name: 'dashboard' })
         })
         .catch(error => {
           this.loading = false

@@ -10,15 +10,8 @@ import CxltToastr from 'cxlt-vue2-toastr'
 
 Vue.config.productionTip = false
 
-const toastrConfigs = {
-  position: 'bottom right',
-  showDuration: 2000,
-  timeOut: 5000,
-  progressBar: true,
-}
-
 Vue.use(VeeValidate)
-Vue.use(CxltToastr, toastrConfigs)
+Vue.use(CxltToastr)
 
 Vue.component('paginate', Paginate)
 

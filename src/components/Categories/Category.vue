@@ -2,10 +2,18 @@
 	<v-layout wrap row>
 		<v-flex xs12 sm12 md12 class="">
 			<v-navigation-drawer
-			class="deep-purple darken-1 white--text"
-			dark
 			permanent
 			>
+			<v-toolbar flat>
+				<v-list>
+					<v-list-tile>
+						<v-list-tile-title class="title">
+						Category
+						</v-list-tile-title>
+					</v-list-tile>
+				</v-list>
+			</v-toolbar>
+			<v-divider></v-divider>
 			<v-list>
 				<v-list-tile
 					v-for="(item, i) in categoryGetters"

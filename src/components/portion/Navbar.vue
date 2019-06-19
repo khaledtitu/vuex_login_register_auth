@@ -6,7 +6,7 @@
                 <v-toolbar-items class="hidden-sm-and-down">
                   <v-btn :to="{ name: 'home' }" flat >home</v-btn>
                   <v-btn :to="{ name: 'about' }" flat >About</v-btn>
-                  <v-btn :to="{ name: 'post-ad' }" flat >Post Ad </v-btn>
+                  <v-btn :to="{ name: 'dashboard' }" flat >Dashboard</v-btn>
                   <v-btn v-if="!loggedIn" :to="{ name: 'login' }" flat >Login </v-btn>
                   <v-btn v-if="!loggedIn" :to="{ name: 'register' }" flat>Register</v-btn>
                   <v-btn v-if="loggedIn" :to="{ name: 'logout' }" flat>Logout</v-btn>

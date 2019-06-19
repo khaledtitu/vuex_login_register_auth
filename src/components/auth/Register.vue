@@ -106,7 +106,7 @@ export default {
         password: this.password,
         repeat_password: this.repeat_password,
       })
-        .then(response => {
+        .then(() => {
           this.successMessage = 'Registered Successfully!'
           this.$router.push({ name: 'login', params: { dataSuccessMessage: this.successMessage } })
           this.$toast.success({

@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import SideBar from '../../components/portion/Sidebar'
+import SideBar from '../../components/Portion/Sidebar'
 export default {
   components: {
       SideBar
