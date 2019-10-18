@@ -1,6 +1,6 @@
-# Vuex simple (buy sale) website with token based authentication for ui we used (vuetify)
+# Vuex simple (buy sale) website with token based authentication for ui we are using (vuetify)
 
-# The api is used from (https://github.com/khaledtitu/laravel_api_auth) repo 
+# The api data came from from (https://github.com/khaledtitu/laravel_api_auth) repo 
 
 ## Project setup
 ```
